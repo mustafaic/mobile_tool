@@ -1,4 +1,4 @@
-# filename: app.py
+import os
 from flask import Flask, jsonify
 import subprocess
 
@@ -20,5 +20,10 @@ def get_connected_devices():
 def devices():
     return jsonify(get_connected_devices())
 
+@app.route("/")
+def home():
+    return "API çalışıyor. /devices endpoint'ine gidin."
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
